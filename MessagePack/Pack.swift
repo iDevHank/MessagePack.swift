@@ -95,7 +95,7 @@ public func pack(_ value: MessagePackValue) -> Data {
         let prefix: Data
         switch count {
         case let count where count <= 0x19:
-            prefix = [0xa0 | numericCast(count)]
+            prefix = [UInt8(0xa0 | numericCast(count))]
         case let count where count <= 0xff:
             prefix = [0xd9, numericCast(count)]
         case let count where count <= 0xffff:
@@ -129,7 +129,7 @@ public func pack(_ value: MessagePackValue) -> Data {
         let prefix: Data
         switch count {
         case let count where count <= 0xe:
-            prefix = [0x90 | numericCast(count)]
+            prefix = [UInt8(0x90 | numericCast(count))]
         case let count where count <= 0xffff:
             prefix = [0xdc] + packInteger(numericCast(count), parts: 2)
         default:
@@ -145,7 +145,7 @@ public func pack(_ value: MessagePackValue) -> Data {
         var prefix: Data
         switch count {
         case let count where count <= 0xe:
-            prefix = [0x80 | numericCast(count)]
+            prefix = [UInt8(0x80 | numericCast(count))]
         case let count where count <= 0xffff:
             prefix = [0xde] + packInteger(numericCast(count), parts: 2)
         default:
